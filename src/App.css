@@ -6,14 +6,16 @@
 }
 
 .logo {
-  height: 6em;
+  height: 15em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #d1df3895);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +35,79 @@
   }
 }
 
-.card {
-  padding: 2em;
+/* Styles specific to the SearchBar component */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
 }
 
-.read-the-docs {
+.search-input {
+  padding: 10px;
+  width: 100%; 
+  max-width: 300px; 
+  margin-bottom: 10px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the input, search, and clear buttons */
+}
+
+.search-button, .clear-button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.clear-button {
+  background-color: #a9a3a2; /* Red color for clear button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+
+/* Keep the space reserved for the table */
+.results-container {
+  min-height: 250px; /* Reserve enough space for the table or "no results" */
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  
+}
+
+/* Initially hide the table */
+.table-hidden {
+  visibility: hidden; /* Keep space but hide content */
+ 
+}
+
+.table-visible {
+  visibility: visible; /* Show table when search is triggered */
+  
+}
+
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 100%; 
+  max-width: 800px;
+   
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left; 
+  border: 1px solid #ccc;
+}
+
+.no-results {
+  margin-top: 20px;
   color: #888;
+  visibility: visible; /* Ensure no-results message is displayed */
+ 
 }
