@@ -14,7 +14,7 @@ const SearchBar = () => {
     const donor = item.Donor ? item.Donor.toLowerCase() : "";
     const ticketNumber = item["Ticket Number"] || "";
     const reference = item.Reference || "";
-    
+
     return (
       donor.includes(searchTerm.toLowerCase()) ||
       ticketNumber.includes(searchTerm) ||
@@ -24,6 +24,7 @@ const SearchBar = () => {
 
   return (
     <div>
+      <p>salam alaikum</p>
       <input
         type="text"
         placeholder="Search by Donor, Ticket Number, or Reference"
