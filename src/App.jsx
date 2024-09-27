@@ -51,7 +51,8 @@ const SearchBar = () => {
   return (
     <div className="search-container">
       <img className="logo" src="https://github.com/Yahia89/icsgv-ticketing/blob/main/src/assets/data/logo-icsgv.png?raw=true" alt="islamic center of san gabriel valley logo" />
-      <p>salam alaikum</p>
+      <p>Salam Alaikum</p>
+      <p>Search by Donor, Ticket Number, or Reference</p>
       <div className="input-container">
         <input
           type="text"
