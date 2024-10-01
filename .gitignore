@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-eventData.json
+./src/assets/data/eventData.json
 node_modules
 dist
 dist-ssr
