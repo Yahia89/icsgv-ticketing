@@ -63,6 +63,11 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+.checked-in {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: green;  
+}
 
 /* Keep the space reserved for the table */
 .results-container {
