@@ -9,6 +9,7 @@ lerna-debug.log*
 
 # Ignore event data file
 src/assets/data/eventData.json
+firebaseConfig.js
 
 # Dependency directories
 node_modules
