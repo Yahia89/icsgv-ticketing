@@ -63,7 +63,6 @@
   padding: 10px 20px;
   cursor: pointer;
   color: green;
-  font-size: xx-large;
 }
 
 
@@ -87,7 +86,7 @@
   max-width: 800px;
   margin: 0 auto;
   border-collapse: collapse;
-  table-layout: auto; /* Columns will resize to fit */
+  table-layout: fixed; /* Columns will resize to fit */
 }
 
 .table th, .table td {
