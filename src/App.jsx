@@ -42,8 +42,15 @@ const SearchBar = () => {
   }, []);
 
   const handleSearchClick = () => {
-    setSearchTriggered(true);
+    if (searchTerm.trim()) {
+      setSearchTriggered(true);
+    } else {
+      setFilteredData([]);
+      setSearchTriggered(false);
+    }
   };
+  
+  
 
   const handleClearClick = () => {
     setSearchTerm("");
@@ -93,25 +100,30 @@ const SearchBar = () => {
 
   useEffect(() => {
     const handleFilter = () => {
-      const results = data.filter((item) => {
-        const donor = item.Donor ? item.Donor.toLowerCase() : "";
-        const ticketNumber = item["Ticket Number"] || "";
-        const reference = item.Reference || "";
-        const ticketType = item["Ticket Type"] ? item["Ticket Type"].toLowerCase() : "";
+      if (searchTerm.trim()) {  // Only filter if searchTerm is not empty
+        const results = data.filter((item) => {
+          const donor = item.Donor ? item.Donor.toLowerCase() : "";
+          const ticketNumber = item["Ticket Number"] || "";
+          const reference = item.Reference || "";
+          const ticketType = item["Ticket Type"] ? item["Ticket Type"].toLowerCase() : "";
   
-        return (
-          donor.includes(searchTerm.toLowerCase()) ||
-          ticketNumber.includes(searchTerm) ||
-          reference.includes(searchTerm) ||
-          ticketType.includes(searchTerm.toLowerCase()) // Compare ticket type with the lowercased searchTerm
-        );
-      });
-      setFilteredData(results);
+          return (
+            donor.includes(searchTerm.toLowerCase()) ||
+            ticketNumber.includes(searchTerm) ||
+            reference.includes(searchTerm) ||
+            ticketType.includes(searchTerm.toLowerCase())
+          );
+        });
+        setFilteredData(results);
+      } else {
+        setFilteredData([]);  // Clear results if searchTerm is empty
+      }
     };
   
     const debouncedHandleFilter = debounce(handleFilter, 300);
     debouncedHandleFilter();
   }, [searchTerm, data]);
+  
   
 
   return (
@@ -139,43 +151,46 @@ const SearchBar = () => {
       </div>
 
       {searchTriggered && filteredData.length > 0 && (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Donor</th>
-              <th>Ticket Number</th>
-              <th>Reference</th>
-              <th>Ticket Type</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((item) => {
-              const ticketNumber = item["Ticket Number"];
-              const isCheckedIn = checkedInStatus[ticketNumber];
-              const isLoading = loadingCheckIn[ticketNumber];
+  <div className="table-container">
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Donor</th>
+          <th>Ticket Number</th>
+          <th>Reference</th>
+          <th>Ticket Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredData.map((item) => {
+          const ticketNumber = item["Ticket Number"];
+          const isCheckedIn = checkedInStatus[ticketNumber];
+          const isLoading = loadingCheckIn[ticketNumber];
 
-              return (
-                <tr key={ticketNumber}>
-                  <td>{item.Donor || "N/A"}</td>
-                  <td>{ticketNumber || "N/A"}</td>
-                  <td>{item.Reference || "N/A"}</td>
-                  <td>{item["Ticket Type"] || "N/A"}</td>
-                  <td>
-                    <button
-                      onClick={() => handleCheckIn(item)}
-                      className={`check-in-button ${isCheckedIn ? "checked-in" : ""}`}
-                      disabled={isCheckedIn || isLoading}
-                    >
-                      {isLoading ? "Loading..." : isCheckedIn ? "✔️ Checked In" : "Check In"}
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+          return (
+            <tr key={ticketNumber}>
+              <td>{item.Donor || "N/A"}</td>
+              <td>{ticketNumber || "N/A"}</td>
+              <td>{item.Reference || "N/A"}</td>
+              <td>{item["Ticket Type"] || "N/A"}</td>
+              <td>
+                <button
+                  onClick={() => handleCheckIn(item)}
+                  className={`check-in-button ${isCheckedIn ? "checked-in" : ""}`}
+                  disabled={isCheckedIn || isLoading}
+                >
+                  {isLoading ? "Loading..." : isCheckedIn ? "✔️ Checked In" : "Check In"}
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+)}
+
 
       {searchTriggered && filteredData.length === 0 && (
         <p className="no-results">No results found for "{searchTerm}".</p>

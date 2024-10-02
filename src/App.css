@@ -29,26 +29,21 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 /* Styles specific to the SearchBar component */
 .search-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  /* margin: 20px 0;
+  padding: 0 10px; */
 }
 
 .search-input {
   font-size: 16px;
-  padding: 10px 20px;
-  width: 100%; 
-  max-width: 300px; 
-  margin: 10px 20px; 
+  padding: 10px ;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px ;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -56,61 +51,76 @@
 .input-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between the input, search, and clear buttons */
+  gap: 10px;
 }
 
 .search-button, .clear-button {
   padding: 10px 20px;
   cursor: pointer;
 }
+
 .checked-in {
   padding: 10px 20px;
   cursor: pointer;
-  color: green;  
+  color: green;
+  font-size: xx-large;
 }
+
 
 /* Keep the space reserved for the table */
 .results-container {
-  min-height: 250px; /* Reserve enough space for the table or "no results" */
+  min-height: 250px;
   width: 100%;
   max-width: 800px;
   margin: 20px auto;
-  
 }
 
-/* Initially hide the table */
-.table-hidden {
-  visibility: hidden; /* Keep space but hide content */
- 
+/* Table container ensures no overflow */
+.table-container {
+  width: 100%;
+  overflow: clip; /* Prevent horizontal scrolling */
 }
 
-.table-visible {
-  visibility: visible; /* Show table when search is triggered */
-  
-}
-
+/* Set table-layout to fixed for responsive behavior */
 .table {
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
   border-collapse: collapse;
-  width: 100%; 
-  max-width: 800px;
-   
+  table-layout: auto; /* Columns will resize to fit */
 }
 
 .table th, .table td {
   padding: 10px;
-  text-align: left; 
+  text-align: center;
   border: 1px solid #ccc;
+  word-wrap: break-word; /* Prevent text overflow */
 }
 
 .no-results {
   margin-top: 20px;
   color: #888;
-  visibility: visible; /* Ensure no-results message is displayed */ 
 }
 
+/* Media query for smaller screens */
 @media (max-width: 600px) {
   .search-input {
-    font-size: 16px; /* Force at least 16px on smaller screens */
+    font-size: 14px; /* Slightly reduce font size */
+  }
+
+  .table th, .table td {
+    padding: 6px; /* Reduce padding on smaller screens */
+  }
+
+  .table {
+    font-size: 12px; /* Reduce font size to make it fit */
+  }
+
+  .table-container {
+    max-width: 100%;
+  }
+
+  .table th, .table td {
+    word-wrap: break-word; /* Ensure long text wraps in smaller cells */
   }
 }
