@@ -180,7 +180,7 @@ const SearchBar = () => {
                   className={`check-in-button ${isCheckedIn ? "checked-in" : ""}`}
                   disabled={isCheckedIn || isLoading}
                 >
-                  {isLoading ? "Loading..." : isCheckedIn ? "✔️ Checked In" : "Check In"}
+                  {isLoading ? "•••" : isCheckedIn ? "✅" : "➡️"}
                 </button>
               </td>
             </tr>

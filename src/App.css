@@ -62,8 +62,13 @@
 .checked-in {
   padding: 10px 20px;
   cursor: pointer;
-  color: green;
 }
+.check-in-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  /* max-width: 100%; */
+}
+
 
 
 /* Keep the space reserved for the table */
@@ -113,6 +118,7 @@
 
   .table {
     font-size: 12px; /* Reduce font size to make it fit */
+    max-width: max-content;
   }
 
   .table-container {
