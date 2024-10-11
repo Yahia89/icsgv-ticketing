@@ -61,11 +61,18 @@
 
 .checked-in {
   padding: 10px 20px;
-  cursor: pointer;
+  cursor: not-allowed;
+  color: unset;
+  border: none; /* Ensure no border is shown */
+}
+
+.checked-in:hover {
+  border: none; /* Prevent border on hover */
+  box-shadow: none; /* Prevent any shadow effects on hover */
+  background-color: none; /* Optional: keep background consistent */
 }
 .check-in-button {
   padding: 10px 20px;
-  cursor: pointer;
   /* max-width: 100%; */
 }
 
