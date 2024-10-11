@@ -40,10 +40,10 @@
 
 .search-input {
   font-size: 16px;
-  padding: 10px ;
+  padding: 10px;
   width: 100%;
   max-width: 300px;
-  margin: 10px ;
+  margin: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -54,7 +54,8 @@
   gap: 10px;
 }
 
-.search-button, .clear-button {
+.search-button,
+.clear-button {
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -75,8 +76,6 @@
   padding: 10px 20px;
   /* max-width: 100%; */
 }
-
-
 
 /* Keep the space reserved for the table */
 .results-container {
@@ -101,7 +100,8 @@
   table-layout: fixed; /* Columns will resize to fit */
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 10px;
   text-align: center;
   border: 1px solid #ccc;
@@ -113,26 +113,81 @@
   color: #888;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 600px) {
-  .search-input {
-    font-size: 14px; /* Slightly reduce font size */
+/*
+	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+	*/
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
   }
 
-  .table th, .table td {
-    padding: 6px; /* Reduce padding on smaller screens */
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
 
-  .table {
-    font-size: 12px; /* Reduce font size to make it fit */
-    max-width: max-content;
+  tr {
+    margin: 0 0 1rem 0;
   }
 
-  .table-container {
-    max-width: 100%;
+  tr:nth-child(odd) {
+    background: #3d3b18d4;
   }
 
-  .table th, .table td {
-    word-wrap: break-word; /* Ensure long text wraps in smaller cells */
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td::before {
+    /* Now like a table header */
+    position: absolute;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    top: 50%; /* Position from the top */
+    transform: translateY(-50%); /* Vertically center the text */
+  }
+
+  /*
+		Label the data
+    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+		*/
+  td:nth-of-type(1)::before {
+    content: "Donor:";
+    text-align: left;
+  }
+  td:nth-of-type(2)::before {
+    content: "Ticket Number:";
+    text-align: left;
+  }
+  td:nth-of-type(3)::before {
+    content: "Reference:";
+    text-align: left;
+  }
+  td:nth-of-type(4)::before {
+    content: "Ticket Type:";
+    text-align: left;
+  }
+  td:nth-of-type(5)::before {
+    content: "Remaining Guests:";
+    text-align: left;
+  }
+  td:nth-of-type(6)::before {
+    content: "Actions:";
+    text-align: left;
   }
 }

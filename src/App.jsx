@@ -47,8 +47,6 @@ const SearchBar = () => {
       });
       setCheckedInStatus(checkIns);
       setRemainingGuests(guestsRemaining);
-
-     
     } catch (error) {
       console.error("Error fetching checked-in tickets: ", error);
     }
@@ -223,18 +221,18 @@ const SearchBar = () => {
 
       {searchTriggered && filteredData.length > 0 && (
         <div className="table-container">
-          <table className="table">
+          <table className="table" role="table">
             <thead>
               <tr>
-                <th>Donor</th>
-                <th>Ticket Number</th>
-                <th>Reference</th>
-                <th>Ticket Type</th>
-                <th>Remaining Guests</th>
-                <th>Action</th>
+                <th role="columnheader">Donor</th>
+                <th role="columnheader">Ticket Number</th>
+                <th role="columnheader">Reference</th>
+                <th role="columnheader">Ticket Type</th>
+                <th role="columnheader">Remaining Guests</th>
+                <th role="columnheader">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody role="rowgroup">
               {filteredData.map((item) => {
                 const ticketNumber = item["Ticket Number"];
                 const isCheckedIn = checkedInStatus[ticketNumber];
@@ -246,21 +244,27 @@ const SearchBar = () => {
                     ? remainingGuests[ticketNumber]
                     : 10; // Fallback to 10 only if undefined (not for 0)
 
-               
-
                 return (
-                  <tr key={ticketNumber}>
-                    <td>{item.Donor || "N/A"}</td>
-                    <td>{ticketNumber || "N/A"}</td>
-                    <td>{item.Reference || "N/A"}</td>
-                    <td>{item["Ticket Type"] || "N/A"}</td>
-                    <td>
+                  <tr role="row" key={ticketNumber}>
+                    <td role="data-cell" className="fetched-data" data-value>
+                      {item.Donor || "N/A"}
+                    </td>
+                    <td role="data-cell" className="fetched-data">
+                      {ticketNumber || "N/A"}
+                    </td>
+                    <td role="data-cell" className="fetched-data">
+                      {item.Reference || "N/A"}
+                    </td>
+                    <td role="data-cell" className="fetched-data">
+                      {item["Ticket Type"] || "N/A"}
+                    </td>
+                    <td role="data-cell" className="fetched-data">
                       {item["Ticket Type"] === "Table"
                         ? remainingGuestCount
                         : "N/A"}
                     </td>{" "}
                     {/* Display remaining guests */}
-                    <td>
+                    <td role="data-cell" className="fetched-data">
                       <button
                         onClick={() => handleCheckIn(item)}
                         className={`check-in-button ${
